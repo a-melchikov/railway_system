@@ -10,7 +10,7 @@ def station_list(request):
     query = request.GET.get("q")
     sort_field = request.GET.get("sort", "name")
     order = request.GET.get("order", "asc")
-
+    fields = [("name", "Название"), ("tax_id", "ИНН"), ("address", "Адрес")]
     stations = Station.objects.all()
 
     address_fields = ["country", "city", "street", "house", "apartment"]
@@ -37,6 +37,7 @@ def station_list(request):
         "stations/station_list.html",
         {
             "stations": stations,
+            "fields": fields,
             "current_sort": sort_field,
             "current_order": order,
             "next_order": next_order,

@@ -24,42 +24,20 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>
-                    <a href="?{% query_transform sort='name' order=next_order %}">
-                        Название
-                        {% if current_sort == 'name' %}
-                            {% if current_order == 'asc' %}
-                                &#9650;
-                            {% else %}
-                                &#9660;
+                {% for field in fields %}
+                    <th>
+                        <a href="?{% query_transform sort=field.0 order=next_order %}">
+                            {{ field.1 }}
+                            {% if current_sort == field.0 %}
+                                {% if current_order == 'asc' %}
+                                    &#9650;  <!-- Увеличение -->
+                                {% else %}
+                                    &#9660;  <!-- Уменьшение -->
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                    </a>
-                </th>
-                <th>
-                    <a href="?{% query_transform sort='tax_id' order=next_order %}">
-                        ИНН
-                        {% if current_sort == 'tax_id' %}
-                            {% if current_order == 'asc' %}
-                                &#9650;
-                            {% else %}
-                                &#9660;
-                            {% endif %}
-                        {% endif %}
-                    </a>
-                </th>
-                <th>
-                    <a href="?{% query_transform sort='address' order=next_order %}">
-                        Адрес
-                        {% if current_sort == 'address' %}
-                            {% if current_order == 'asc' %}
-                                &#9650;
-                            {% else %}
-                                &#9660;
-                            {% endif %}
-                        {% endif %}
-                    </a>
-                </th>
+                        </a>
+                    </th>
+                {% endfor %}
                 <th>Действия</th>
             </tr>
         </thead>
