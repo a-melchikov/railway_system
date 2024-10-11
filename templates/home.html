@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+  <div class="container text-center mt-5">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="mb-4">Добро пожаловать в систему управления железнодорожными станциями!</h2>
+        <p class="lead">
+          Здесь вы можете управлять вокзалами, поездами и маршрутами.
+        </p>
+        <p class="mb-4">
+          Используйте меню выше для навигации.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <a href="/stations/" class="btn btn-primary btn-lg btn-block">Управлять вокзалами</a>
+      </div>
+      <div class="col-md-6 mb-3">
+        <a href="/trains/" class="btn btn-secondary btn-lg btn-block">Управлять поездами</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

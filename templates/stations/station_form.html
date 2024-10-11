@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Форма вокзала{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{% if station_form.instance.pk %}Изменить{% else %}Добавить{% endif %} вокзал</h2>
+    <form method="post" action="{{ action_url }}">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Данные вокзала</legend>
+            {{ station_form.as_p }}
+        </fieldset>
+        <fieldset>
+            <legend>Адрес</legend>
+            {{ address_form.as_p }}
+        </fieldset>
+        <button type="submit" class="btn btn-success">Сохранить</button>
+        <a href="{% url 'station_list' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}
