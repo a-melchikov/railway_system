@@ -7,18 +7,21 @@ from crew_directory.models import CrewDirectory
 
 class Route(models.Model):
     owner_station = models.ForeignKey(
-        Station, related_name="owner_station", on_delete=models.SET_NULL, null=True
+        Station, on_delete=models.CASCADE, related_name="owned_routes", db_index=True
     )
-    train = models.ForeignKey(Train, on_delete=models.CASCADE)
+    train = models.ForeignKey(Train, on_delete=models.CASCADE, db_index=True)
     departure_station = models.ForeignKey(
-        Station, related_name="departure_station", on_delete=models.SET_NULL, null=True
+        Station,
+        on_delete=models.CASCADE,
+        related_name="departing_routes",
+        db_index=True,
     )
     arrival_station = models.ForeignKey(
-        Station, related_name="arrival_station", on_delete=models.SET_NULL, null=True
+        Station, on_delete=models.CASCADE, related_name="arriving_routes", db_index=True
     )
     departure_time = models.DateTimeField()
     arrival_time = models.DateTimeField()
-    crew = models.ForeignKey(CrewDirectory, on_delete=models.SET_NULL, null=True)
+    crew = models.ForeignKey(CrewDirectory, on_delete=models.CASCADE, db_index=True)
 
     def __str__(self):
-        return f"{self.departure_station} to {self.arrival_station}"
+        return f"{self.train.name} - {self.departure_station.name} to {self.arrival_station.name}"
