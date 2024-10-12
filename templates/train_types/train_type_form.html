@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Форма типа поезда{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{% if form.instance.pk %}Изменить{% else %}Добавить{% endif %} тип поезда</h2>
+    <form method="post" action="{{ action_url }}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Сохранить</button>
+        <a href="{% url 'train_type_list' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}
