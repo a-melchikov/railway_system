@@ -5,9 +5,6 @@ from .models import Train
 from .forms import TrainForm
 
 
-from django.db.models import Q
-
-
 def train_list(request):
     query = request.GET.get("q")
     sort_field = request.GET.get("sort", "name")
