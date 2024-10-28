@@ -9,4 +9,5 @@ urlpatterns = [
     path("train_types/", include("train_types.urls")),
     path("trains/", include("trains.urls")),
     path("positions/", include("positions.urls")),
+    path("crew_directory/", include("crew_directory.urls")),
 ]
