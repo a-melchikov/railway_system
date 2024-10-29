@@ -12,31 +12,46 @@ class Route(models.Model):
         on_delete=models.CASCADE,
         related_name="owned_routes",
         db_index=True,
+        verbose_name="Станция-владелец",
     )
     train = models.ForeignKey(
         Train,
         on_delete=models.CASCADE,
         db_index=True,
+        verbose_name="Поезд",
     )
     departure_station = models.ForeignKey(
         Station,
         on_delete=models.CASCADE,
         related_name="departing_routes",
         db_index=True,
+        verbose_name="Станция отправления",
     )
     arrival_station = models.ForeignKey(
         Station,
         on_delete=models.CASCADE,
         related_name="arriving_routes",
         db_index=True,
+        verbose_name="Станция прибытия",
     )
-    departure_time = models.DateTimeField(default=timezone.now)
-    arrival_time = models.DateTimeField(default=timezone.now)
+    departure_time = models.DateTimeField(
+        default=timezone.now,
+        verbose_name="Время отправления",
+    )
+    arrival_time = models.DateTimeField(
+        default=timezone.now,
+        verbose_name="Время прибытия",
+    )
     crew = models.ForeignKey(
         CrewDirectory,
         on_delete=models.CASCADE,
         db_index=True,
+        verbose_name="Бригада",
     )
+
+    class Meta:
+        verbose_name = "Маршрут"
+        verbose_name_plural = "Маршруты"
 
     def __str__(self):
         return f"{self.train.name} - {self.departure_station.name} to {self.arrival_station.name}"
