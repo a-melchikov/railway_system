@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load query_transform %}
+
+{% block title %}Список остановок маршрута{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Список остановок маршрута</h2>
+
+    <form method="get" class="mb-3">
+        <div class="row">
+            <div class="col-md-10">
+                <input type="text" name="q" class="form-control" placeholder="Поиск по поезду или станции остановки" value="{{ request.GET.q }}">
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-outline-secondary" type="submit">Поиск</button>
+            </div>
+        </div>
+    </form>
+
+    <a href="{% url 'route_detail_create' %}" class="btn btn-primary mb-3">Добавить остановку</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                {% for field in fields %}
+                    <th>
+                        <a href="?{% query_transform sort=field.0 order=next_order %}">
+                            {{ field.1 }}
+                            {% if current_sort == field.0 %}
+                                {% if current_order == 'asc' %}
+                                    &#9650;
+                                {% else %}
+                                    &#9660;
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </th>
+                {% endfor %}
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for route_detail in route_details %}
+                <tr>
+                    <td>{{ route_detail.route.train.name }}</td>
+                    <td>{{ route_detail.stop_number }}</td>
+                    <td>{{ route_detail.stop_station.name }}</td>
+                    <td>{{ route_detail.arrival_time }}</td>
+                    <td>{{ route_detail.departure_time }}</td>
+                    <td>
+                        <a href="{% url 'route_detail_update' route_detail.pk %}" class="btn btn-sm btn-warning">Изменить</a>
+                        <a href="{% url 'route_detail_delete' route_detail.pk %}" class="btn btn-sm btn-danger">Удалить</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">Нет остановок для отображения.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
