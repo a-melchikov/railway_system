@@ -27,31 +27,29 @@
       }
 
       header {
-        background-size: cover;
-        background-position: center;
-        padding: 100px 0;
+        background: rgba(52, 58, 64);
+        padding: 20px 0;
         text-align: center;
         color: white;
+        position: relative;
+        overflow: hidden;
       }
 
       h1 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 4rem;
+        font-family: "Montserrat", sans-serif;
+        font-size: 3rem;
         font-weight: 700;
-        background: linear-gradient(90deg, #00c6ff, #0072ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
         margin: 0;
       }
 
       header::after {
-        content: '';
+        content: "";
         display: block;
         height: 5px;
-        background: linear-gradient(90deg, #00c6ff, #0072ff);
+        background: #fff;
         margin: 20px auto 0;
-        width: 50%;
+        width: 100%;
         border-radius: 5px;
       }
 
@@ -79,14 +77,6 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         max-width: 1200px;
       }
-
-      footer {
-        background-color: #343a40;
-        color: white;
-        padding: 15px;
-        text-align: center;
-        margin-top: 50px;
-      }
     </style>
   </head>
 
@@ -107,13 +97,7 @@
       <a href="/route_details/">Данные маршрутов</a>
     </nav>
 
-    <main>
-      {% block content %}{% endblock %}
-    </main>
-
-    <footer>
-      © 2024 Железнодорожная система
-    </footer>
+    <main>{% block content %}{% endblock %}</main>
 
     <!-- Подключение Bootstrap JS и jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
