@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ form.instance.pk|yesno:"Изменить сотрудника,Добавить сотрудника" }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ form.instance.pk|yesno:"Изменить,Добавить" }} сотрудника</h2>
+    <form method="post" action="{{ action_url }}">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Данные сотрудника</legend>
+            {{ form.as_p }}
+        </fieldset>
+        <button type="submit" class="btn btn-success">Сохранить</button>
+        <a href="{% url 'personnel_list' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}
